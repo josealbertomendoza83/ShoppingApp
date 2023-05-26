@@ -1,0 +1,20 @@
+<h2>Product</h2>
+<p>
+  <span>Descripcion:</span>
+  <input type="text" [(ngModel)]="cliente.nombre">
+</p>
+<p>
+  <span>Release Date:</span>
+  <input type="date" [(ngModel)]="cliente.cif">
+</p>
+<p>
+  <span>Priority:</span>
+  <select [(ngModel)]="cliente.grupo">
+    <option *ngFor="let grupo of grupos" value="{{grupo.id}}">{{grupo.nombre}}</option>
+  </select>
+</p>
+<p>
+  <button (click)="this.nuevoCliente()">Guardar</button>
+</p>
+
+

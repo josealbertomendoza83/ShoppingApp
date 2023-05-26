@@ -1,0 +1,35 @@
+<h2>
+    Order List
+  </h2>
+
+  <p>
+    <input [ngModel]="searchText" (ngModelChange)="searchKey($event)" placeholder="Filter Information"> 
+  </p>
+
+
+  <div *ngIf="! clientes.length">There is no Order</div><div *ngIf="clientes.length>0">
+ <table class="table table-bordered table-condensed table-striped">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Release Date</th>
+            <th>Priority</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- <div> -->
+            <tr *ngFor="let cliente of clientes">
+             <td><span>  {{cliente.nombre}} </span> </td> 
+             <td ><span style="width: 150px;
+                float:right;
+                margin-right: -30px;"> {{cliente.cif}}</span></td>
+             <td><span> {{cliente.grupo}}</span> </td>
+            <td><button type="button" class="btn btn-light mr-1" (click)="doBorrarCliente(cliente)"> Delete</button></td>
+        </tr>
+    </tbody>
+            
+      <!-- </div> -->
+   
+ </table>
+</div>
