@@ -21,15 +21,15 @@ export class ClientesService {
       },
       {
         id: 1,
-        nombre: 'Urgent'
+        nombre: '1 - Urgent' //Urgent
       },
       {
         id: 2,
-        nombre: 'High'
+        nombre: '2 - Medium' //MEdium
       },
       {
         id: 3,
-        nombre: 'Low'
+        nombre: '3 - Low'  //Low
       },
     ];
     this.clientes = [];
@@ -39,16 +39,18 @@ export class ClientesService {
     return this.grupos;
   }
 
-  // getClientes() {
-  //   return this.clientes;
-  // }
+  getClientes() {
+    return this.clientes;
+  }
 
   getClientes$(): Observable<Cliente[]> {
     return this.clientes$.asObservable();
   }
 
   agregarCliente(cliente: Cliente) {
+    debugger;
     this.clientes.push(cliente);
+    localStorage.setItem(cliente.nombre, cliente.id.toString());
     this.clientes$.next(this.clientes);
   }
 

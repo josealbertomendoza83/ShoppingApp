@@ -18,18 +18,13 @@ export class ListadoClientesComponent implements OnInit, OnDestroy {
   clientes$!: Observable<Cliente[]>;
   clientesSubscription!: Subscription;
 
-  searchText="hello world";
+  searchText="";
   constructor(private clientesService: ClientesService) { 
-
-    
   }
 
   ngOnInit() {
     this.clientes$ = this.clientesService.getClientes$();
     this.clientesSubscription = this.clientes$.subscribe((clientes: Cliente[]) => this.clientes = clientes);
-
-
-    
   }
 
   doBorrarCliente(cliente: Cliente) {
@@ -41,23 +36,22 @@ export class ListadoClientesComponent implements OnInit, OnDestroy {
     this.clientesSubscription.unsubscribe();
   }
 
-  onChange(value:string) {
-    //this.text = event.target.value;
-    console.log("New value = " + value)
-  };
-
   searchKey(data: string) {
-    this.searchText = data;
-    this.search();
+    debugger;
+    if(data.length>0){
+      this.searchText = data;
+      this.search();
+    }
+    else
+    this.clientes = this.clientesService.getClientes();
+    
   }
 
   search() {
-    this.clientes = this.searchText === ""? this.clientes : this.clientes.filter((element) => {
-      return element.nombre.toLowerCase() == this.searchText.toLowerCase();
+    debugger;
+    //this.clientes = this.searchText === ""? this.clientes : this.clientes.filter((element) => { element.nombre == this.searchText;
+    this.clientes = this.clientes.filter(element => {
+      return element.nombre.indexOf(this.searchText) != -1 ? element : null
     });
   }
-
-// sendTheNewValue(event){
-// this.value = event.target.value;
-// }
 }
